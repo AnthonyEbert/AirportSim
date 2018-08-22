@@ -25,44 +25,12 @@ This is a basic example which shows you how to solve a common problem:
 library(AirportSim)
 
 # Input data
-airport_list_1
-#> $global_level
-#>   distance_dpl distance_imm distance_bh   mu  vm2   lag rate_bags nu_bags
-#> 1          100          150          80 0.02 0.64 0.005         4     1.2
-#>   server_bags server_cus rate_cus
-#> 1           8         10        3
-#> 
-#> $flight_level
-#> # A tibble: 10 x 7
-#>    flight    arrive  gate passengers scale_dpl shape_dpl p_nat    
-#>    <chr>      <dbl> <dbl>      <dbl>     <dbl>     <dbl> <list>   
-#>  1 flight 1     10.    1.       150.      4.20      3.70 <dbl [2]>
-#>  2 flight 2     30.    2.       200.      2.80      2.00 <dbl [2]>
-#>  3 flight 3     50.    3.       200.      4.20      3.30 <dbl [2]>
-#>  4 flight 4     65.    2.       250.      3.10      2.10 <dbl [2]>
-#>  5 flight 5     72.    4.       250.      4.00      2.10 <dbl [2]>
-#>  6 flight 6     80.    2.       180.      3.40      2.60 <dbl [2]>
-#>  7 flight 7     85.    1.       470.      3.00      2.80 <dbl [2]>
-#>  8 flight 8    100.    3.       620.      3.40      2.70 <dbl [2]>
-#>  9 flight 9    118.    4.       300.      2.20      2.40 <dbl [2]>
-#> 10 flight 10   120.    2.       310.      3.30      2.70 <dbl [2]>
-#> 
-#> $gate_level
-#> # A tibble: 5 x 4
-#>    gate distance_gate lag_bags handler
-#>   <dbl>         <dbl>    <dbl> <chr>  
-#> 1    1.           80.       5. team A 
-#> 2    2.           30.      15. team A 
-#> 3    3.          300.       5. team B 
-#> 4    4.          450.       5. team B 
-#> 5    5.          800.      10. team B 
-#> 
-#> $nat_level
-#> # A tibble: 2 x 3
-#>   nat     rate_imm server_imm
-#>   <chr>      <dbl> <list>    
-#> 1 foreign     1.20 <S3: list>
-#> 2 local       1.60 <dbl [1]>
+str(airport_list_1, 1)
+#> List of 4
+#>  $ global_level:'data.frame':    1 obs. of  11 variables:
+#>  $ flight_level:Classes 'tbl_df', 'tbl' and 'data.frame':    10 obs. of  7 variables:
+#>  $ gate_level  :Classes 'tbl_df', 'tbl' and 'data.frame':    5 obs. of  4 variables:
+#>  $ nat_level   :Classes 'tbl_df', 'tbl' and 'data.frame':    2 obs. of  3 variables:
 
 # Run simulation
 passenger_table <- do.call(AirportSimulate1, airport_list_1)
@@ -95,7 +63,7 @@ passenger_table
 
 system.time(do.call(AirportSimulate1, airport_list_1))
 #>    user  system elapsed 
-#>   0.080   0.000   0.079
+#>   0.080   0.000   0.078
 ```
 
 Voilla! Have a look at the source code in R/AirportSimulate1.R
@@ -133,6 +101,7 @@ p <- ggplot(out2) + aes(x = value, fill = factor(flight)) + stat_bin(position = 
   geom_text(mapping = aes(x = value, y = ifelse((as.numeric(substr(flight, start = 7, stop = 12)) %% 2) == 0,-15,-10), label = flight), data = out2_grouped, size = 2) + theme_bw() + theme(legend.position = "none")
 
 p + facet_wrap(~key, ncol = 1) 
+#> Warning: Removed 1 rows containing non-finite values (stat_bin).
 #> Warning: Removed 100 rows containing missing values (geom_bar).
 ```
 

@@ -34,7 +34,7 @@ This is a basic example which shows you how to solve a common problem:
 library(AirportSim)
 
 # Input data
-airport_list_1
+str(airport_list_1, 1)
 
 # Run simulation
 passenger_table <- do.call(AirportSimulate1, airport_list_1)
