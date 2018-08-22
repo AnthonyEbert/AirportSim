@@ -1,0 +1,79 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# AirportSim
+
+The goal of AirportSim is to demonstrate how queuecomputer can be used to quickly simulate a large scale system. In this case, an airport. 
+
+## Installation
+
+You can install AirportSim from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("AnthonyEbert/AirportSim")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+
+library(AirportSim)
+
+# Input data
+airport_list_1
+
+# Run simulation
+passenger_table <- do.call(AirportSimulate1, airport_list_1)
+
+# Show output
+passenger_table
+
+system.time(do.call(AirportSimulate1, airport_list_1))
+
+```
+
+Voilla! Have a look at the source code in R/AirportSimulate1.R
+
+
+```{r ggplot2}
+
+library(ggplot2)
+library(dplyr)
+
+x <- c("arrive_ac", "arrive_imm", "arrive_bh", "arrive_cus", "depart_cus")
+
+out2 <- 
+  tidyr::gather(
+    passenger_table %>% select(flight, arrive_ac, arrive_imm, arrive_bh, arrive_cus, depart_cus), 
+    key = "key", 
+    value = "value", 
+    -flight
+  ) %>% 
+  mutate(key = factor(key, levels = x)) %>% 
+  arrange(key) 
+
+out2_grouped <- out2 %>% group_by(flight, key) %>% summarise(value = median(value), passengers = n())
+
+p <- ggplot(out2) + aes(x = value, fill = factor(flight)) + stat_bin(position = "stack", bins = 200, col = NA) + ylab("Passenger/min") + xlab("Time of day")  +
+  geom_linerange(mapping = aes(x = value, ymin = -5, ymax = 0, col = factor(flight)), data = out2_grouped) + 
+  scale_x_continuous(labels = scales::trans_format( function(x){x}, function(x){substr(lubridate::as_datetime(x * 60 + 360 * 60), 12, 16)} ), breaks = (seq(0,5, by = 0.5))*60, expand = c(0, 0), limits = c(0, 200)) +
+  geom_text(mapping = aes(x = value, y = ifelse((as.numeric(substr(flight, start = 7, stop = 12)) %% 2) == 0,-15,-10), label = flight), data = out2_grouped, size = 2) + theme_bw() + theme(legend.position = "none")
+
+p + facet_wrap(~key, ncol = 1) 
+
+```
+
