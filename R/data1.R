@@ -56,7 +56,7 @@ generate_flightlevel <- function(n, max_time = 1000){
 flight_level_1 <-
   tibble::tribble(
     ~flight    , ~arrive, ~gate , ~passengers, ~scale_dpl, ~shape_dpl, ~p_nat     ,
-    "flight 1" , 10     , 1     , 150        , 4.2       , 3.7       , c(0.2, 0.8),
+    "flight 1" , 25     , 1     , 150        , 4.2       , 3.7       , c(0.2, 0.8),
     "flight 2" , 30     , 2     , 200        , 2.8       , 2.0       , c(0.5, 0.5),
     "flight 3" , 50     , 3     , 200        , 4.2       , 3.3       , c(0.5, 0.5),
     "flight 4" , 65     , 2     , 250        , 3.1       , 2.1       , c(0.3, 0.7),

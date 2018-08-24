@@ -18,8 +18,6 @@ devtools::install_github("AnthonyEbert/AirportSim")
 Example
 -------
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
 
 library(AirportSim)
@@ -40,16 +38,16 @@ passenger_table
 #> # A tibble: 2,930 x 42
 #>    flight   arrive  gate passengers scale_dpl shape_dpl p_nat        ID
 #>    <chr>     <dbl> <dbl>      <dbl>     <dbl>     <dbl> <list>    <int>
-#>  1 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     1
-#>  2 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     2
-#>  3 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     3
-#>  4 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     4
-#>  5 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     5
-#>  6 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     6
-#>  7 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     7
-#>  8 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     8
-#>  9 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>     9
-#> 10 flight 1    10.    1.       150.      4.20      3.70 <dbl [2]>    10
+#>  1 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     1
+#>  2 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     2
+#>  3 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     3
+#>  4 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     4
+#>  5 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     5
+#>  6 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     6
+#>  7 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     7
+#>  8 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     8
+#>  9 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>     9
+#> 10 flight 1    25.    1.       150.      4.20      3.70 <dbl [2]>    10
 #> # ... with 2,920 more rows, and 34 more variables: distance_gate <dbl>,
 #> #   lag_bags <dbl>, handler <chr>, nat <chr>, rate_imm <dbl>,
 #> #   server_imm <list>, walk_speed <dbl>, deplane <dbl>, arrive_ac <dbl>,
@@ -63,7 +61,7 @@ passenger_table
 
 system.time(do.call(AirportSimulate1, airport_list_1))
 #>    user  system elapsed 
-#>   0.080   0.000   0.078
+#>   0.080   0.000   0.079
 ```
 
 Voilla! Have a look at the source code in R/AirportSimulate1.R
@@ -101,7 +99,6 @@ p <- ggplot(out2) + aes(x = value, fill = factor(flight)) + stat_bin(position = 
   geom_text(mapping = aes(x = value, y = ifelse((as.numeric(substr(flight, start = 7, stop = 12)) %% 2) == 0,-15,-10), label = flight), data = out2_grouped, size = 2) + theme_bw() + theme(legend.position = "none")
 
 p + facet_wrap(~key, ncol = 1) 
-#> Warning: Removed 1 rows containing non-finite values (stat_bin).
 #> Warning: Removed 100 rows containing missing values (geom_bar).
 ```
 

@@ -1,6 +1,6 @@
 Package: AirportSim
 Title: Simulates an airport
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Anthony", "Ebert", email = "anthonyebert+CRAN@gmail.com", role = c("aut", "cre"))
 Description: Simulates an airport
 Depends: R (>= 3.4)
