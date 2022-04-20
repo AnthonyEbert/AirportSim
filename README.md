@@ -1,9 +1,13 @@
 
+<!-- badges: start -->
+[![DOI](https://img.shields.io/badge/doi-10.1002/9781118445112.stat08189-informational.svg)](https://doi.org/10.1002/9781118445112.stat08189)
+<!-- badges: end -->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 AirportSim
 ==========
 
-The goal of AirportSim is to demonstrate how queuecomputer can be used to quickly simulate a large scale system. In this case, an airport.
+The goal of AirportSim is to demonstrate how queuecomputer can be used to quickly simulate a large scale system. In this case, an airport. The paper corresponding to this repository can be found here: https://doi.org/10.1002/9781118445112.stat08189
 
 Installation
 ------------
